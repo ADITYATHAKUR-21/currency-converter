@@ -1,15 +1,49 @@
-import React from 'react'
+import React from "react";
 
 const InputBox = ({
-   lable,
-   onAmountChange,
-   onCurrencyChange,
-   currencyOption = [],
-   selectedCurrency = `USD`
+  label,
+  amount,
+  onAmountChange,
+  onCurrencyChange,
+  currencyOption = [],
+  selectedCurrency = `USD`,
+  amountDisabled = false,
+  currencyDisabled = false,
+  className = "",
 }) => {
   return (
-    <div>InputBox</div>
-  )
-}
+    <div className={`bg-white p-3 rounded-lg flex ${onAmountChange}`}>
+      <div className="">
+        <label className="">${label}</label>
+        <input
+          type="Number"
+          className=""
+          disabled={amountDisabled}
+          value={amount}
+          onChange={(e) =>
+            {onAmountChange && onAmountChange(Number(e.target.value))}
+          }
+        />
+      </div>
+      <p className="">Currency Type</p>
+      <select
+       value={onCurrencyChange}
+       onChange={(e) =>
+         {onCurrencyChange && onCurrencyChange(e.target.value)}}
+         disabled = {currencyDisabled}
+      >
+        {currencyOption .map((Currency) => (
+            <option key={Currency} value={Currency}>{Currency}</option>
+        ))}
 
-export default InputBox
+      </select>
+      
+
+      <div>
+
+      </div>
+    </div>
+  );
+};
+
+export default InputBox;
