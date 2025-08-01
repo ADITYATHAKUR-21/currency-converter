@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useId} from "react";
 
 const InputBox = ({
   label,
@@ -6,33 +6,33 @@ const InputBox = ({
   onAmountChange,
   onCurrencyChange,
   currencyOption = [],
-  selectedCurrency = `USD`,
+  selectedCurrency = `usd`,
   amountDisabled = false,
   currencyDisabled = false,
   className = "",
 }) => {
+
+  const id = useId()
   return (
-    <div className={`bg-white p-3 rounded-lg flex ${onAmountChange}`}>
+    <div className={`bg-white p-3 rounded-lg flex ${className}`}>
       <div className="">
-        <label className="">${label}</label>
+        <label htmlFor={id} className="">{label}</label>
         <input
-          type="Number"
+          id={id}
+          type="number"
           className=""
           disabled={amountDisabled}
           value={amount}
-          onChange={(e) =>
-            {onAmountChange && onAmountChange(Number(e.target.value))}
-          }
+          onChange={(e) => onAmountChange && onAmountChange(Number(e.target.value))}
         />
       </div>
       <p className="">Currency Type</p>
       <select
-       value={onCurrencyChange}
-       onChange={(e) =>
-         {onCurrencyChange && onCurrencyChange(e.target.value)}}
-         disabled = {currencyDisabled}
+        value={selectedCurrency}
+        onChange={(e) => onCurrencyChange && onCurrencyChange(e.target.value)}
+        disabled={currencyDisabled}
       >
-        {currencyOption .map((Currency) => (
+        {currencyOption.map((Currency) => (
             <option key={Currency} value={Currency}>{Currency}</option>
         ))}
 
